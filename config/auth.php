@@ -36,9 +36,14 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'web' => [ 
             'driver' => 'session',
             'provider' => 'users',
+        ],
+
+        'medical_user' => [
+            'driver' => 'session',
+            'provider' => 'medical_users',
         ],
     ],
 
@@ -63,6 +68,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'medical_users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\MedicalUser::class,
         ],
 
         // 'users' => [
@@ -93,6 +103,14 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+
+        'medical_users' => [
+            'provider' => 'medical_users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
     ],
 
     /*

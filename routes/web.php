@@ -22,6 +22,15 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::prefix('medical_user')->name('medical_user.')->group(function(){
+
+    Route::get('/dashboard', function () {
+        return view('medical_user.dashboard');
+    })->middleware(['auth:medical_user'])->name('dashboard');
+    
+    require __DIR__.'/medical_user.php';
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -29,3 +38,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::prefix('medical_user')->name('medical_user.')->group(function(){
+    require __DIR__.'/medical_user.php';
+});
