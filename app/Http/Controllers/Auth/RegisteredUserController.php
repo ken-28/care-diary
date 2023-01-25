@@ -32,20 +32,28 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'name_kana' => ['required', 'string', 'max:255'],
+            'birth' => ['required', 'date'],
+            'sex' => ['required', 'integer'],
+            'image' => ['required', 'string'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.FamilyUser::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
+        $family_user = FamilyUser::create([
             'name' => $request->name,
+            'name_kana' => $request->name_kana,
+            'birth' => $request->birth,
+            'sex' => $request->sex,
+            'image' => $request->image,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
+        event(new Registered($family_user));
 
-        Auth::login($user); 
+        Auth::login($family_user); 
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::FAMILY_USER_HOME);
     }
 }

@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [ 
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'family_users',
         ],
 
         'medical_user' => [
@@ -65,9 +65,9 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'family_users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\FamilyUser::class,
         ],
 
         'medical_users' => [
@@ -97,8 +97,8 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'family_users' => [
+            'provider' => 'family_users',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
