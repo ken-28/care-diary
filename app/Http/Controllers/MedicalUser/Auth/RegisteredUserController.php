@@ -32,12 +32,22 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'name_kana' => ['required', 'string', 'max:255'],
+            'birth' => ['required', 'date'],
+            'sex' => ['required', 'integer'],
+            'job' => ['required', 'integer'],
+            'image' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = MedicalUser::create([
             'name' => $request->name,
+            'name_kana' => $request->name_kana,
+            'birth' => $request->birth,
+            'sex' => $request->sex,
+            'job' => $request->job,
+            'image' => $request->image,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);

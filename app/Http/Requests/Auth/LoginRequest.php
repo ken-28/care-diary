@@ -41,7 +41,7 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        $this->is('admin/*') ? $guard = 'admin' : $guard = 'web';
+        $this->is('medical_user/*') ? $guard = 'medical_user' : $guard = 'web';
 
         if (! Auth::guard($guard)->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());

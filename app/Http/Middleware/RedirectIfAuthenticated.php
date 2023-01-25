@@ -40,7 +40,7 @@ class RedirectIfAuthenticated
                 return redirect(RouteServiceProvider::MEDICAL_USER_HOME);
             }
 
-            return redirect(RouteServiceProvider::HOME);
+            return redirect(RouteServiceProvider::FAMILY_USER_HOME);
         }
     }
 

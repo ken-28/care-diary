@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard'; 
+    public const FAMILY_USER_HOME = '/family_user/dashboard'; 
     public const MEDICAL_USER_HOME = '/medical_user/dashboard';
 
     /**
@@ -30,32 +30,13 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            /**
-             *   Route::middleware('api')
-             *       ->prefix('api')
-             *       ->group(base_path('routes/api.php'));
-             *
-             *   Route::middleware('web')
-             *       ->group(base_path('routes/web.php'));
-             */ 
-
-             Route::prefix('api')
-                ->middleware('api')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/api.php'));
-
-             Route::prefix('/')
-                ->as('user.')
-                ->middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/web.php'));
             
-            Route::prefix('medical_user')
-                ->as('medical_user.')
-                ->middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/medical_user.php'));
-
+            Route::middleware('api')
+                    ->prefix('api')
+                    ->group(base_path('routes/api.php'));
+            
+            Route::middleware('web')
+                    ->group(base_path('routes/web.php'));
             
         });
     }
